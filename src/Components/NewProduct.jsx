@@ -21,6 +21,7 @@ const NewProduct = () => {
       "count": 120
     }
   */
+  //new
 
   const [newProduct, setnewProduct] = useState({
     title: "",
