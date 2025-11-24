@@ -8,6 +8,7 @@ const NewProduct = () => {
     margin: " 20px auto",
     padding: "20px ",
   };
+
   /*
   {
     "id": 1,
@@ -21,9 +22,8 @@ const NewProduct = () => {
       "count": 120
     }
   */
-  //new
 
-  const [newProduct, setnewProduct] = useState({
+  const [newProduct, setNewProduct] = useState({
     title: "",
     price: 500,
     description:
@@ -36,9 +36,64 @@ const NewProduct = () => {
     },
   });
   const handleChange = (e) => {
-    console.log(e.target.value);
-    console.log(e.target.name);
+    let { name, value } = e.target;
+    let fieldname = name.split("rating.")[1];
+
+    if (name.includes("rating.")) {
+      setNewProduct({
+        ...newProduct,
+        rating: {
+          ...newProduct.rating,
+          [fieldname]: value,
+        },
+      });
+    } else {
+      setNewProduct({
+        ...newProduct,
+        [name]: value,
+      });
+    }
+    // console.log(newProduct);
   };
+
+  // const handleAdd = (e) => {
+  //   e.preventDefault();
+  //   fetch("http://localhost:4000/product", {
+  //     method: "POST",
+  //     headers: {
+  //       "content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(newProduct),
+  //   }).then(() => {
+  //     alert("Data Added successfully🥳");
+  //   });
+  // };
+
+  const handleAdd=(e)=>{
+    e.preventDefault();
+    fetch("http://localhost:4000/product", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newProduct),
+    }).then(() => {
+      alert("Data Added successfully");
+    });
+    setNewProduct({
+      title: "",
+      price: 500,
+      description:
+        "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+      category: "",
+      image: "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_t.png",
+      rating: {
+        rate: 0,
+        count: 0,
+      },
+    });
+  }
+
 
   return (
     <>
@@ -46,7 +101,11 @@ const NewProduct = () => {
         <Typography variant="h5" textAlign={"center"} paddingBottom={"10px"}>
           Create a New Product
         </Typography>
-        <Grid component="form" style={{ display: "grid", gap: "20px" }}>
+        <Grid
+          component="form"
+          style={{ display: "grid", gap: "20px" }}
+          onSubmit={handleAdd}
+        >
           <TextField
             value={newProduct.title}
             name="title"
@@ -91,7 +150,7 @@ const NewProduct = () => {
               />
             </Grid>
           </Grid>
-          <Button variant="contained" fullWidth>
+          <Button type="submit" variant="contained" fullWidth>
             ADD
           </Button>
         </Grid>

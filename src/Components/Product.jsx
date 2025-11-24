@@ -6,7 +6,7 @@ import useFetch from "./custom-Hook/useFetch";
 import { LifeLine } from "react-loading-indicators";
 const Product = () => {
   const { product, error, isLoading } = useFetch(
-    "https://fakestoreapi.com/products"
+    "http://localhost:4000/product"
   );
 
   if (isLoading) {
