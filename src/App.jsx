@@ -8,6 +8,7 @@ import Product from "./Components/Product";
 import TodoList from "./Components/TodoList";
 import NewProduct from "./Components/NewProduct";
 import NotFound from "./Components/NotFound";
+import UpdateProduct from "./Components/UpdateProduct";
 
 const App = () => {
   let userName = "Ram kumar";
@@ -19,9 +20,10 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="login/:userName" element={<Login />} />
           <Route path="/product" element={<Product />} />
-
           <Route path="/todolist" element={<TodoList />} />
           <Route path="/newproduct" element={<NewProduct />} />
+          <Route path="/update/:id" element={<UpdateProduct />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

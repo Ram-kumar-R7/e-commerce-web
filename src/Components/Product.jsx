@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { data } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import useFetch from "./custom-Hook/useFetch";
 import { LifeLine } from "react-loading-indicators";
+import { MdShoppingCartCheckout } from "react-icons/md";
+import { FaEdit } from "react-icons/fa";
+import { MdDeleteSweep } from "react-icons/md";
+
 const Product = () => {
+  let navigate = useNavigate()
   const { product, error, isLoading } = useFetch(
     "http://localhost:4000/product"
   );
@@ -43,15 +48,25 @@ const Product = () => {
             </center>
             <Card.Body>
               <Card.Title>{items.title}</Card.Title>
-              <Card.Text style={{ overflow: "scroll", height: "150px" }}>
+              {/*  new button */}
+              <Card.Text style={{textAlign : "center"}}>${items.price}</Card.Text>
+              {/* <Card.Text style={{ overflow: "scroll", height: "150px" }}>
                 {items.description}
-              </Card.Text>
+              </Card.Text> */}
             </Card.Body>
             <Card.Footer
               style={{ display: "flex", justifyContent: "space-evenly" }}
             >
-              <Card.Text>${items.price}</Card.Text>
-              <Button variant="primary">Add to Card</Button>
+              {/* <Card.Text>${items.price}</Card.Text> */}
+              <Button variant="primary">
+                <MdShoppingCartCheckout />
+              </Button>
+              <Button variant="secondary" onClick={()=>{navigate(`/update/${items.id}`);}}>
+                <FaEdit />
+              </Button>
+              <Button variant="danger">
+                <MdDeleteSweep />
+              </Button>
             </Card.Footer>
           </Card>
         ))}
