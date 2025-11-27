@@ -23,7 +23,6 @@ const UpdateProduct = () => {
   }, []);
 
   const handleChange = (e) => {
-    e.preventDefault();
     let { name, value } = e.target;
     let fieldname = name.split("rating.")[1];
 

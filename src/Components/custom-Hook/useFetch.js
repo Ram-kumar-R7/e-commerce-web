@@ -19,7 +19,7 @@ function useFetch(url) {
     };
     fetchApi();
   }, []);
-  return { product, error, isLoading };
+  return { product, error, isLoading, setProduct };
 }
 
 export default useFetch;
